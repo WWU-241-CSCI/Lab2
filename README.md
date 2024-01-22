@@ -1,4 +1,6 @@
-# CSCI241 Spring 2022: Lab 2
+% CSCI 241 - Lab 2
+% Dr. Caroline Hardin
+% Winter 2024
 
 ## Overview
 
@@ -10,7 +12,7 @@ In this course, we will be using JUnit, a widely-used testing framework for Java
 
 ## Git and submission for Lab 2
 
-For this lab, you will be working in your A1 repository. If you have not yet accepted the Github Classroom invitation, find the link on canvas and clone your repository as per the instructions for A1. You will submit your code for this lab by committing and pushing the changes to your `SortsTest.java` file to your remote A1 respository on GitHub.
+For this lab, you will be working in your A1 repository. If you have not yet accepted the Github Classroom invitation, find the link on canvas and clone your repository as per the instructions for A1. You will submit your code for this lab by committing and pushing the changes in `SortsTest.java` and `Sorts.java` to your remote A1 respository on GitHub.
 
 *It is recommended that you commit your changes regularly, at least once per method you implement. When you have something working, push your changes to GitHub.*
 
@@ -22,11 +24,13 @@ Gradle knows how to compile and run JUnit tests. The standard location for test 
 
 To check that a sorting method has done its job correctly, the resulting array must have two properties:
 
-- The resulting array is sorted.
+-   The resulting array is sorted.
 
-- The resulting array has exactly the same elements as the original.
+-   The resulting array has exactly the same elements as the original.
 
 Below all the test cases, you will find stubs (i.e., method headers with missing implementation) for the methods that you need to implement to make the tests work correctly. This includes two methods that check the above two properties for sorted arrays, and one method that is used in tests for the `partition` helper method for quick sort.
+
+**Important**: all of the A1 unit tests depend on the methods you implement in this lab. If your `SortsTest.java` helper methods are not correct, the A1 unit tests will not correctly test your sorts. Subtle bugs here can result in tests passing despite buggy A1 code; as such, you should thoroughly convince yourself that these methods are correct before relying on them.
 
 ## Debugging with Unit Tests
 
@@ -40,51 +44,51 @@ In the projects for this class, tests are named with both numbers that sort them
 
 So you have a unit test failing but it's not immediately obvious why your code isn't correct. Here are some strategies for narrowing down where to look for the bug:
 
-1. Check the specification of the method that fails the test. Are there cases you're not handling?
+1.  Check the specification of the method that fails the test. Are there cases you're not handling?
 
-2. Open the test file (e.g., `app/src/test/java/SortsTest.java`) and find the specific test method that's failing. **Read and understand this method and any helper methods it calls.** What functionality is this particular test checking?
+2.  Open the test file (e.g., `app/src/test/java/SortsTest.java`) and find the specific test method that's failing. **Read and understand this method and any helper methods it calls.** What functionality is this particular test checking?
 
-3. Look at the stack trace output from gradle. Which exact line of the test case is failing? What assertion was being made? Look further down the stack trace - which part of your code was being called by the test case that failed?
+3.  Look at the stack trace output from gradle. Which exact line of the test case is failing? What assertion was being made? Look further down the stack trace - which part of your code was being called by the test case that failed?
 
-4. If you're iteratively debugging and re-running the tests, it can be annoying to wade through the stack traces for all the rest of the tests you aren't working on yet. You can tell gradle to only run a single test (or a subset of tests) using the `–tests` flag. A couple examples of this might look like:
+4.  If you're iteratively debugging and re-running the tests, it can be annoying to wade through the stack traces for all the rest of the tests you aren't working on yet. You can tell gradle to only run a single test (or a subset of tests) using the `–tests` flag. A couple examples of this might look like:
 
- - `gradle test –tests "SortsTest.test00Insertion"` will run only the `test00Insertion` method
+    -   `gradle test --tests "SortsTest.test00Insertion"` will run only the `test00Insertion` method
 
- - `gradle test –tests "SortsTest.test*Insertion"` uses the wildcard `*` to run all tests that match the given pattern---in this case, all five tests for Insertion sort.
+    -   `gradle test --tests "SortsTest.test*Insertion"` uses the wildcard `*` to run all tests that match the given pattern---in this case, all five tests for Insertion sort.
 
-5. At this point, you understand what's being tested, you understand what exact assertion is failing, you've looked at your code and you still believe the assertion should pass. Somehow, your understanding of what's going on in the code differs from the reality of what's going on. For me, this is the point where I start checking my assumptions.
+5.  At this point, you understand what's being tested, you understand what exact assertion is failing, you've looked at your code and you still believe the assertion should pass. Somehow, your understanding of what's going on in the code differs from the reality of what's going on. For me, this is the point where I start checking my assumptions.
 
- My favorite way to do this is to print out information that tells me about the program state and see if it matches your expectations. Depending on the situation, it may make sense to put debugging print statements in the code being tested, or perhaps in the test code itself. Either way, I strongly recommend using the `–tests` filter to run the one specific test you're working on and avoid getting more debugging output than you bargained for.
+    My favorite way to do this is to print out information that tells me about the program state and see if it matches your expectations. Depending on the situation, it may make sense to put debugging print statements in the code being tested, or perhaps in the test code itself. Either way, I strongly recommend using the `–tests` filter to run the one specific test you're working on and avoid getting more debugging output than you bargained for.
 
- When you've learned what you need to learn, be sure to take out the print statements to avoid gumming up your output.
+    When you've learned what you need to learn, be sure to take out the print statements to avoid gumming up your output.
 
 ## Implementation Tasks
 
 For each of the methods you need to implement, see the specification in the code for details of how it should behave.
 
-1. Implement `isSorted`, which checks whether an array is sorted.
+1.  Implement `isSorted`, which checks whether an array is sorted.
 
-2. Implement `public static boolean sameElements`, which checks whether two arrays contain the same elements. Hint: use a `java.util.HashMap<Integer,Integer>` (which is a lot like a Python dictionary) to keep track of how many times each value appears. The easiest way to find documentation on the HashMap class (or any other java class) is by googling "java 8 HashMap"
+2.  Implement `public static boolean sameElements`, which checks whether two arrays contain the same elements. Hint: use a `java.util.HashMap<Integer,Integer>` (which is a lot like a Python dictionary) to keep track of how many times each value appears. The easiest way to find documentation on the HashMap class (or any other java class) is by googling "java 8 HashMap"
 
- You may find the following `HashMap` methods useful:
+    You may find the following `HashMap` methods useful:
 
- - put(K key, V value)
+    -   `put(K key, V value)`
 
- - get(Object key)
+    -   `get(Object key)`
 
- - containsKey(Object key)
+    -   `containsKey(Object key)`
 
- - isEmpty()
+    -   `isEmpty()`
 
- - remove(Object key)
+    -   `remove(Object key)`
 
-3. At this point, if you have not written the `insertionSort` method in Sorts.java, you should do so now. Feel free to refer back to the pseudocode developed in lecture.
+3.  At this point, if you have not written the `insertionSort` method in Sorts.java, you should do so now. Feel free to refer back to the pseudocode developed in lecture.
 
-4. Run `gradle test` and make sure the tests for insertionSort pass. Debug your code until your code passes all the tests with "Insertion" in the method name. Keep in mind that bugs may reside in `insertionSort` or in the test code itself. Use the information in the stack trace to help you out.
+4.  Run `gradle test` and make sure the tests for insertionSort pass. Debug your code until your code passes all the tests with "Insertion" in the method name. Keep in mind that bugs may reside in `insertionSort` or in the test code itself. Use the information in the stack trace to help you out.
 
-5. Implement `public static boolean isPartitioned`, which checks whether the array has been correctly partitioned around a given "pivot" element. This is used by the methods that test the QuickSort method. You'll need to make sure that this is implemented correctly without the help of any unit tests.
+5.  Implement `public static boolean isPartitioned`, which checks whether the array has been correctly partitioned around a given "pivot" element. This is used by the methods that test the QuickSort method. You'll need to make sure that this is implemented correctly without the help of any unit tests.
 
-6. Make sure you have committed and pushed both Sorts.java (with `insertionSort` completed---the other sorts need not be done until you submit A1) and TestSorts.java to your A1 repository on github.
+6.  Make sure you have committed and pushed both `Sorts.java` (with `insertionSort` completed---the other sorts need not be done until you submit A1) and `SortsTest.java` to your A1 repository on github.
 
 ## Rubric
 
@@ -92,11 +96,11 @@ This lab is worth 10 points. The three helper methods in SortsTest.java are wort
 
 Deductions may be made for:
 
-- Submission issues
+-   Submission issues
 
-- Compile or run-time errors when running tests
+-   Compile or run-time errors when running tests
 
-- Poor coding style (e.g. commenting, indentation, variable naming, etc.)
+-   Poor coding style (e.g. commenting, indentation, variable naming, etc.)
 
 ## Acknowledgments
 
