@@ -104,4 +104,4 @@ Deductions may be made for:
 
 ## Acknowledgments
 
-*Thanks are owed to Tanzima Islam, Qiang Hao, Brian Hutchinson, Filip Jagodzinski, and others for producing and refining past labs from which this lab was adapted.*
+*Thanks are owed to Scott Wehrwein, Tanzima Islam, Qiang Hao, Brian Hutchinson, Filip Jagodzinski, and others for producing and refining past labs from which this lab was adapted.*
